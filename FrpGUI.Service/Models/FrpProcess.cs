@@ -9,13 +9,14 @@ public class FrpProcess : IFrpProcess
     private readonly LoggerBase logger;
 
     public FrpProcess()
-    { }
+    {
+    }
 
-    public FrpProcess(FrpConfigBase config, LoggerBase logger)
+    public FrpProcess(FrpConfigBase config, LoggerBase logger, IAppConfig appConfig)
     {
         Config = config;
         this.logger = logger;
-        Process = new ProcessService(Config, logger);
+        Process = new ProcessService(Config, logger, appConfig);
         Process.Exited += Process_Exited;
     }
 
@@ -41,6 +42,7 @@ public class FrpProcess : IFrpProcess
         {
             throw new Exception("进程未在运行");
         }
+
         ChangeStatus(ProcessStatus.Busy);
         try
         {
@@ -51,6 +53,7 @@ public class FrpProcess : IFrpProcess
             ChangeStatus(ProcessStatus.Stopped);
             throw;
         }
+
         ChangeStatus(ProcessStatus.Running);
     }
 
@@ -60,6 +63,7 @@ public class FrpProcess : IFrpProcess
         {
             throw new Exception("进程已在运行");
         }
+
         ChangeStatus(ProcessStatus.Busy);
         try
         {
@@ -79,6 +83,7 @@ public class FrpProcess : IFrpProcess
         {
             throw new Exception("进程未在运行");
         }
+
         ChangeStatus(ProcessStatus.Busy);
         await Process.StopAsync();
         ChangeStatus(ProcessStatus.Stopped);

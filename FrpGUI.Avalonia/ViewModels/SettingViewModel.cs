@@ -75,44 +75,6 @@ namespace FrpGUI.Avalonia.ViewModels
         }
 
         [RelayCommand]
-        private async Task BrowseFrpPathAsync()
-        {
-            try
-            {
-                if (OperatingSystem.IsBrowser())
-                {
-                    return;
-                }
-                
-                var dialog = new OpenFolderDialog
-                {
-                    Title = "选择frp程序目录"
-                };
-                
-                // 获取父窗口引用
-                Window parentWindow = null;
-                if (App.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
-                {
-                    // 使用当前活动窗口或主窗口
-                    parentWindow = desktopLifetime.MainWindow;
-                }
-                
-                // 显示对话框
-                var result = await dialog.ShowAsync(parentWindow);
-                if (!string.IsNullOrEmpty(result))
-                {
-                    FrpPath = result;
-                }
-            }
-            catch (Exception ex)
-            {
-                // 记录错误但不抛出异常，避免应用闪退
-                Debug.WriteLine($"浏览frp路径时出错: {ex.Message}");
-                await DialogService.ShowErrorDialogAsync("操作失败", "浏览frp路径时发生错误，请重试。");
-            }
-        }
-
-        [RelayCommand]
         private async Task KillProcessAsync(ProcessInfo p)
         {
             Debug.Assert(p != null);
