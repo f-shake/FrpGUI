@@ -1,4 +1,4 @@
-﻿using FrpGUI.Avalonia.Models;
+using FrpGUI.Avalonia.Models;
 using FrpGUI.Configs;
 using FzLib;
 using System;
@@ -8,10 +8,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Text.Json.Serialization.Metadata;
+using FrpGUI.Models;
 
 namespace FrpGUI.Avalonia;
 
-public class UIConfig : AppConfigBase, INotifyPropertyChanged
+public class UIConfig : AppConfigBase, IAppConfig, INotifyPropertyChanged
 {
     private RunningMode runningMode;
 
@@ -37,9 +38,12 @@ public class UIConfig : AppConfigBase, INotifyPropertyChanged
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RunningMode)));
         }
     }
+
     public string ServerAddress { get; set; } = "http://localhost:5113";
 
     public string ServerToken { get; set; } = "";
+
+    public string FrpPath { get; set; } = "./frp";
 
     public bool ShowTrayIcon
     {

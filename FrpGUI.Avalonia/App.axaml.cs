@@ -75,12 +75,13 @@ public partial class App : Application
         {
             if (!TcpSingleInstanceHelper.EnsureSingleInstance(() =>
                 {
-                    Dispatcher.UIThread.Invoke(() => 
+                    Dispatcher.UIThread.Invoke(() =>
                     {
                         if (desktop.MainWindow == null)
                         {
                             desktop.MainWindow = mainWindow;
                         }
+
                         mainWindow.BringToFront();
                     });
                     return Task.CompletedTask;
@@ -162,6 +163,7 @@ public partial class App : Application
         builder.Services.AddTransient<LogViewModel>();
 
         builder.Services.AddSingleton(uiconfig);
+        builder.Services.AddSingleton<IAppConfig, UIConfig>(s => uiconfig);
 
         AppHost = builder.Build();
 
@@ -236,7 +238,8 @@ public partial class App : Application
     private void TrayIcon_Clicked(object sender, EventArgs e)
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {  if (desktop.MainWindow == null)
+        {
+            if (desktop.MainWindow == null)
             {
                 desktop.MainWindow = mainWindow;
             }

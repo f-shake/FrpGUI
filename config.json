@@ -28,7 +28,7 @@
       "PoolCount": 50,
       "Rules": [],
       "ServerAddress": null,
-      "ServerPort": 7000,
+      "ServerPort": 7001,
       "Token": null,
       "Type": "c",
       "AutoStart": false,

@@ -32,6 +32,29 @@
             Spacing="8">
             <HeaderedContentControl
                 Classes="GroupBox"
+                Header="frp配置">
+                <StackPanel
+                    Orientation="Vertical"
+                    Spacing="8">
+                    <ctrl:FormItem
+                        Description="请选择包含frpc和frps可执行文件的目录，仅在单机模式下生效"
+                        Label="frp程序目录：">
+                        <ctrl:FilePickerTextBox
+                            FileNames="{Binding FrpPath}"
+                            Type="OpenFolder">
+                            <ctrl:FilePickerTextBox.Styles>
+                                <Style Selector="ctrl|FilePickerTextBox TextBox">
+                                    <Setter Property="Watermark" Value="./frp" />
+                                </Style>
+                            </ctrl:FilePickerTextBox.Styles>
+                        </ctrl:FilePickerTextBox>
+                    </ctrl:FormItem>
+
+                </StackPanel>
+            </HeaderedContentControl>
+
+            <HeaderedContentControl
+                Classes="GroupBox"
                 Header="运行模式">
                 <StackPanel
                     Orientation="Vertical"

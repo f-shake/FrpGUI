@@ -5,11 +5,15 @@ using FrpGUI.Models;
 using FrpGUI.Services;
 
 namespace FrpGUI.Tests
-{   
+{
+    class TestAppConfig : IAppConfig
+    {
+        public string FrpPath { get; } = "./frp";
+    }
+
     [TestClass]
     public class UnitTest
     {
-
         public const string LOCALHOST = "localhost";
         public const int PORT = 7000;
         public const string TOKEN = "frptoken";
@@ -29,7 +33,7 @@ namespace FrpGUI.Tests
                 }
             };
             var logger = new TestLogger();
-            FrpProcessCollection processes = new FrpProcessCollection(config, logger);
+            FrpProcessCollection processes = new FrpProcessCollection(config, logger, new TestAppConfig());
             var server = processes.GetOrCreateProcess(configs.server.ID);
             var client = processes.GetOrCreateProcess(configs.client.ID);
             var visitor = processes.GetOrCreateProcess(configs.visitor.ID);
@@ -82,7 +86,7 @@ namespace FrpGUI.Tests
                 Token = TOKEN,
                 ServerAddress = LOCALHOST,
                 EnableTls = true,
-                DashBoardPort=7501,
+                DashBoardPort = 7501,
                 Rules = new List<Rule>()
                 {
                     new Rule()

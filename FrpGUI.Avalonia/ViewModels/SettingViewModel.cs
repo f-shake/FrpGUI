@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FrpGUI.Avalonia.DataProviders;
 using FrpGUI.Models;
@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using FrpGUI.Enums;
 using FzLib.Application.Startup;
 using FzLib.Avalonia.Dialogs;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace FrpGUI.Avalonia.ViewModels
 {
@@ -33,6 +35,9 @@ namespace FrpGUI.Avalonia.ViewModels
 
         [ObservableProperty]
         private string token;
+        
+        [ObservableProperty]
+        private string frpPath;
 
         public SettingViewModel(IDataProvider provider, IDialogService dialogService, IStartupManager startupManager,
             UIConfig config) : base(provider, dialogService)
@@ -45,6 +50,7 @@ namespace FrpGUI.Avalonia.ViewModels
 
             Config = config;
             ServerAddress = config.ServerAddress;
+            FrpPath = config.FrpPath;
             FillProcesses();
             Config.PropertyChanged += (s, e) =>
             {
@@ -102,6 +108,7 @@ namespace FrpGUI.Avalonia.ViewModels
         public async Task<bool> TryCloseAsync()
         {
             Config.ServerAddress = ServerAddress;
+            Config.FrpPath = FrpPath;
             if (!string.IsNullOrEmpty(Token)) //如果密码修改了
             {
                 Config.ServerToken = Token;

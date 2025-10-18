@@ -4,7 +4,8 @@ using FrpGUI.Services;
 
 namespace FrpGUI.Models;
 
-public class FrpProcessCollection(AppConfig config, LoggerBase logger) : Dictionary<string, FrpProcess>
+public class FrpProcessCollection(AppConfig config, LoggerBase logger, IAppConfig appConfig)
+    : Dictionary<string, FrpProcess>
 {
     public IFrpProcess GetOrCreateProcess(string id)
     {
@@ -12,8 +13,9 @@ public class FrpProcessCollection(AppConfig config, LoggerBase logger) : Diction
         {
             return process;
         }
+
         var frp = GetFrpConfig(id);
-        process = new FrpProcess(frp, logger);
+        process = new FrpProcess(frp, logger, appConfig);
         Add(id, process);
         return process;
     }
@@ -31,6 +33,7 @@ public class FrpProcessCollection(AppConfig config, LoggerBase logger) : Diction
         {
             list.Add(GetOrCreateProcess(item.ID));
         }
+
         return list;
     }
 
@@ -41,6 +44,7 @@ public class FrpProcessCollection(AppConfig config, LoggerBase logger) : Diction
         {
             await frp.StopAsync();
         }
+
         config.FrpConfigs.Remove(frp.Config);
         Remove(frp.Config.ID);
         config.Save();
