@@ -149,11 +149,9 @@ public partial class MainViewModel : ViewModelBase
         string errorTitle = null;
         string errorMessage = null;
         bool cancelCheck = false;
-        
+
         await progressOverlayService.WithOverlayAsync(async () =>
             {
-                try
-                {
                     var result = await DataProvider.VerifyTokenAsync();
                     string token;
                     switch (result)
@@ -174,13 +172,6 @@ public partial class MainViewModel : ViewModelBase
                             errorMessage = "服务端密码为空，请先设置密码";
                             break;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Log.Logger.Warning(ex,"服务网络错误");
-                    errorTitle = "网络错误";
-                    errorMessage = ex.Message;
-                }
             },
             () =>
             {
@@ -188,6 +179,13 @@ public partial class MainViewModel : ViewModelBase
                 progressOverlayService.SetVisible(false);
                 return Task.CompletedTask;
             },
+             (ex) =>
+            {
+                Log.Logger.Warning(ex, "服务网络错误");
+                errorTitle = "网络错误";
+                errorMessage = ex.Message;
+                return Task.CompletedTask;
+            }, 
             "正在连接服务器");
 
         if (cancelCheck)

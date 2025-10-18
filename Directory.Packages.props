@@ -37,7 +37,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
     <PackageVersion Include="WebView.Avalonia" Version="11.0.0.1" />
     <PackageVersion Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
-    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.2" />
+    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.6.5" />
     <PackageVersion Include="Xaml.Behaviors.Interactivity" Version="11.3.2" />
     <PackageVersion Include="HotAvalonia" Version="3.0.0" PrivateAssets="All" Publish="True" />
     <PackageVersion Include="System.Reactive" Version="6.0.1" />

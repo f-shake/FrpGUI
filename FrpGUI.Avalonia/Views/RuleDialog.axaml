@@ -18,9 +18,9 @@
     Padding="4"
     x:DataType="vm:RuleViewModel"
     CloseButtonContent="取消"
-    CloseButtonEnable="True"
+    IsCloseButtonEnabled="True"
+    IsPrimaryButtonEnabled="True"
     PrimaryButtonContent="保存"
-    PrimaryButtonEnable="True"
     Theme="{StaticResource DialogHostTheme}"
     mc:Ignorable="d">
 

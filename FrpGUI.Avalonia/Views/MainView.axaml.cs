@@ -16,7 +16,7 @@ public partial class MainView : UserControl
     public MainView()
     {
         InitializeComponent();
-        App.Services.GetRequiredService<IProgressOverlayService>().Register(ring);
+        App.Services.GetRequiredService<IProgressOverlayService>().Attach(ring);
     }
 
     protected override void OnLoaded(RoutedEventArgs e)

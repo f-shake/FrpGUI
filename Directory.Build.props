@@ -4,12 +4,12 @@
     <AppVersion>3.1.1</AppVersion>
 
     <!--Avalonia库版本-->
-    <AvaloniaVersion>11.3.5</AvaloniaVersion>
+    <AvaloniaVersion>11.3.7</AvaloniaVersion>
     <!--FzLib库版本-->
-    <FzLibVersion>3.0.11</FzLibVersion>
+    <FzLibVersion>3.1.8</FzLibVersion>
 
     <!--使用本地FzLib库。非作者使用时，应改为F-->
-    <FzLocal>T</FzLocal>
+    <FzLocal>F</FzLocal>
 
     <!--在Windows上开发，可以设置输出到临时文件夹-->
     <OutputToTempDir>T</OutputToTempDir>

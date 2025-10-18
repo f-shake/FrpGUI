@@ -24,7 +24,7 @@
 
     <ScrollViewer
         HorizontalScrollBarVisibility="Disabled"
-        IsEnabled="{Binding $parent[dialog:DialogHost].CloseButtonEnable}"
+        IsEnabled="{Binding $parent[dialog:DialogHost].IsCloseButtonEnabled}"
         VerticalScrollBarVisibility="Auto">
 
         <StackPanel
