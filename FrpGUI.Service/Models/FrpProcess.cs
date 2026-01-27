@@ -12,11 +12,11 @@ public class FrpProcess : IFrpProcess
     {
     }
 
-    public FrpProcess(FrpConfigBase config, LoggerBase logger, IAppConfig appConfig)
+    public FrpProcess(FrpConfigBase config, LoggerBase logger, IEnvironmentConfig environmentConfig)
     {
         Config = config;
         this.logger = logger;
-        Process = new ProcessService(Config, logger, appConfig);
+        Process = new ProcessService(Config, logger, environmentConfig);
         Process.Exited += Process_Exited;
     }
 

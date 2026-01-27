@@ -1,12 +1,12 @@
 <Project>
   <PropertyGroup>
     <!--App版本-->
-    <AppVersion>3.1.1</AppVersion>
+    <AppVersion>3.3</AppVersion>
 
     <!--Avalonia库版本-->
-    <AvaloniaVersion>11.3.7</AvaloniaVersion>
+    <AvaloniaVersion>11.3.11</AvaloniaVersion>
     <!--FzLib库版本-->
-    <FzLibVersion>3.1.8</FzLibVersion>
+    <FzLibVersion>3.3.2</FzLibVersion>
 
     <!--使用本地FzLib库。非作者使用时，应改为F-->
     <FzLocal>F</FzLocal>

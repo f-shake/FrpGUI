@@ -4,11 +4,11 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace FrpGUI.Configs
 {
-    public abstract class AppConfigBase
+    public abstract class ConfigBase
     {
         public abstract string ConfigPath { get; }
 
-        public static T Get<T>(JsonTypeInfo<T> jsonTypeInfo) where T : AppConfigBase, new()
+        public static T Get<T>(JsonTypeInfo<T> jsonTypeInfo) where T : ConfigBase, new()
         {
             T config = new T();
 
@@ -28,7 +28,7 @@ namespace FrpGUI.Configs
             return config;
         }
 
-        protected virtual T GetImpl<T>(JsonTypeInfo<T> jsonTypeInfo) where T : AppConfigBase
+        protected virtual T GetImpl<T>(JsonTypeInfo<T> jsonTypeInfo) where T : ConfigBase
         {
             return JsonSerializer.Deserialize(File.ReadAllText(ConfigPath), jsonTypeInfo);
         }

@@ -1,4 +1,4 @@
-using FrpGUI.Enums;
+ï»¿using FrpGUI.Enums;
 using System.Diagnostics;
 using FrpGUI.Configs;
 using FrpGUI.Models;
@@ -6,7 +6,7 @@ using FrpGUI.Services;
 
 namespace FrpGUI.Tests
 {
-    class TestAppConfig : IAppConfig
+    class TestEnvironmentConfig : IEnvironmentConfig
     {
         public string FrpPath { get; } = "./frp";
     }
@@ -33,27 +33,27 @@ namespace FrpGUI.Tests
                 }
             };
             var logger = new TestLogger();
-            FrpProcessCollection processes = new FrpProcessCollection(config, logger, new TestAppConfig());
+            FrpProcessCollection processes = new FrpProcessCollection(config, logger, new TestEnvironmentConfig());
             var server = processes.GetOrCreateProcess(configs.server.ID);
             var client = processes.GetOrCreateProcess(configs.client.ID);
             var visitor = processes.GetOrCreateProcess(configs.visitor.ID);
-            Trace.WriteLine("¿ªÊ¼Æô¶¯·şÎñ¶Ë");
+            Trace.WriteLine("å¼€å§‹å¯åŠ¨æœåŠ¡ç«¯");
             await server.StartAsync();
-            Trace.WriteLine("Íê³ÉÆô¶¯·şÎñ¶Ë");
+            Trace.WriteLine("å®Œæˆå¯åŠ¨æœåŠ¡ç«¯");
             await Task.Delay(1000);
 
-            Trace.WriteLine("¿ªÊ¼Æô¶¯¿Í»§¶Ë");
+            Trace.WriteLine("å¼€å§‹å¯åŠ¨å®¢æˆ·ç«¯");
             await client.StartAsync();
-            Trace.WriteLine("Íê³ÉÆô¶¯¿Í»§¶Ë");
+            Trace.WriteLine("å®Œæˆå¯åŠ¨å®¢æˆ·ç«¯");
             await Task.Delay(1000);
 
-            Trace.WriteLine("¿ªÊ¼Æô¶¯·ÃÎÊÕß");
+            Trace.WriteLine("å¼€å§‹å¯åŠ¨è®¿é—®è€…");
             await visitor.StartAsync();
-            Trace.WriteLine("Íê³ÉÆô¶¯·ÃÎÊÕß");
+            Trace.WriteLine("å®Œæˆå¯åŠ¨è®¿é—®è€…");
 
-            Trace.WriteLine("¿ªÊ¼µÈ´ı2Ãë");
+            Trace.WriteLine("å¼€å§‹ç­‰å¾…2ç§’");
             await Task.Delay(2000);
-            Trace.WriteLine("==========2ÃëÒÑ¹ı£¬¿ªÊ¼ÍË³ö½ø³Ì==========");
+            Trace.WriteLine("==========2ç§’å·²è¿‡ï¼Œå¼€å§‹é€€å‡ºè¿›ç¨‹==========");
             await client.StopAsync();
             await visitor.StopAsync();
             await server.StopAsync();
@@ -81,7 +81,7 @@ namespace FrpGUI.Tests
         {
             return new ClientConfig()
             {
-                Name = "¿Í»§¶Ë",
+                Name = "å®¢æˆ·ç«¯",
                 ServerPort = PORT,
                 Token = TOKEN,
                 ServerAddress = LOCALHOST,
@@ -127,7 +127,7 @@ namespace FrpGUI.Tests
         {
             return new ServerConfig()
             {
-                Name = "·şÎñ¶Ë",
+                Name = "æœåŠ¡ç«¯",
                 Port = 7000,
                 Token = TOKEN,
                 TlsOnly = true,
@@ -139,7 +139,7 @@ namespace FrpGUI.Tests
         {
             return new ClientConfig()
             {
-                Name = "·ÃÎÊÕß",
+                Name = "è®¿é—®è€…",
                 ServerPort = PORT,
                 Token = TOKEN,
                 ServerAddress = LOCALHOST,

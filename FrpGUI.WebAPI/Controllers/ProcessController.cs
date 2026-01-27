@@ -1,4 +1,4 @@
-using FrpGUI.Configs;
+﻿using FrpGUI.Configs;
 using FrpGUI.Enums;
 using FrpGUI.Models;
 using FrpGUI.Services;
@@ -36,7 +36,7 @@ public class ProcessController : FrpControllerBase
         {
             serverConfigService.ThrowIfServerOnly();
         }
-        logger.Info($"ָ�����", frp.Config);
+        logger.Info($"指令：启动", frp.Config);
         return frp.StartAsync();
     }
 
@@ -44,7 +44,7 @@ public class ProcessController : FrpControllerBase
     public Task StopAsync(string id)
     {
         var frp = processes.GetOrCreateProcess(id);
-        logger.Info($"ָ�ֹͣ", frp.Config);
+        logger.Info($"指令：停止", frp.Config);
         return frp.StopAsync();
     }
 
@@ -52,7 +52,7 @@ public class ProcessController : FrpControllerBase
     public Task RestartAsync(string id)
     {
         var frp = processes.GetOrCreateProcess(id);
-        logger.Info($"ָ�����", frp.Config);
+        logger.Info($"指令：重启", frp.Config);
         return frp.RestartAsync();
     }
 

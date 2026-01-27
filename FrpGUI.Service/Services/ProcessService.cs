@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace FrpGUI.Services
 {
-    public class ProcessService(FrpConfigBase frpConfig, LoggerBase logger, IAppConfig appConfig)
+    public class ProcessService(FrpConfigBase frpConfig, LoggerBase logger, IEnvironmentConfig environmentConfig)
     {
         public bool IsRunning { get; set; }
 
@@ -15,7 +15,7 @@ namespace FrpGUI.Services
 
         public void Start()
         {
-            string frpPath = appConfig.FrpPath;
+            string frpPath = environmentConfig.FrpPath;
             if (FrpConfig.Type is not ('c' or 's'))
             {
                 throw new ArgumentOutOfRangeException(nameof(FrpConfig.Type));

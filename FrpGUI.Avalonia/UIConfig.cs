@@ -12,7 +12,7 @@ using FrpGUI.Models;
 
 namespace FrpGUI.Avalonia;
 
-public class UIConfig : AppConfigBase, IAppConfig, INotifyPropertyChanged
+public class UIConfig : ConfigBase, IEnvironmentConfig, INotifyPropertyChanged
 {
     private RunningMode runningMode;
 
@@ -55,7 +55,7 @@ public class UIConfig : AppConfigBase, IAppConfig, INotifyPropertyChanged
         }
     }
 
-    private static JsonTypeInfo<UIConfig> JsonTypeInfo { get; } = FrpAvaloniaSourceGenerationContext.Get().UIConfig;
+    private static JsonTypeInfo<UIConfig> JsonTypeInfo { get; } = FrpAvaloniaSourceGenerationContext.Default.UIConfig;
 
     public static UIConfig Get()
     {

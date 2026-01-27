@@ -20,7 +20,7 @@ public class FrpGUIActionFilter(AppConfig config) : IActionFilter
             var headers = context.HttpContext.Request.Headers;
             if (headers.TryGetValue("Authorization", out Microsoft.Extensions.Primitives.StringValues value))
             {
-                if (value != token)
+                if (value != token && value != "Bearer " + token)
                 {
                     context.Result = new UnauthorizedObjectResult("登陆密钥不正确");
                 }
@@ -46,6 +46,7 @@ public class FrpGUIActionFilter(AppConfig config) : IActionFilter
                 {
                     context.Result = new ObjectResult(sbe.Message) { StatusCode = (int)sbe.StatusCode };
                 }
+
                 context.ExceptionHandled = true;
             }
             else
@@ -55,6 +56,7 @@ public class FrpGUIActionFilter(AppConfig config) : IActionFilter
                     context.Result = new ObjectResult(context.Exception.Message) { StatusCode = 500 };
                     context.ExceptionHandled = true;
                 }
+
                 context.ExceptionHandled = true;
             }
         }
