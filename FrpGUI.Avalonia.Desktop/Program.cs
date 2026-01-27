@@ -18,6 +18,7 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.File("logs/logs.txt", rollingInterval: RollingInterval.Day)
