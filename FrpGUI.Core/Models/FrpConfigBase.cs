@@ -5,6 +5,7 @@ namespace FrpGUI.Models
 {
     [JsonDerivedType(typeof(ClientConfig))]
     [JsonDerivedType(typeof(ServerConfig))]
+    [JsonConverter(typeof(FrpConfigJsonConverter))]
     public abstract partial class FrpConfigBase : ObservableObject, IToFrpConfig, ICloneable
     {
         [ObservableProperty]

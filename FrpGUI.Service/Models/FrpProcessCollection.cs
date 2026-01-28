@@ -4,7 +4,7 @@ using FrpGUI.Services;
 
 namespace FrpGUI.Models;
 
-public class FrpProcessCollection(AppConfig config, LoggerBase logger, IAppConfig appConfig)
+public class FrpProcessCollection(AppConfig config, LoggerBase logger, IEnvironmentConfig environmentConfig)
     : Dictionary<string, FrpProcess>
 {
     public IFrpProcess GetOrCreateProcess(string id)
@@ -15,7 +15,7 @@ public class FrpProcessCollection(AppConfig config, LoggerBase logger, IAppConfi
         }
 
         var frp = GetFrpConfig(id);
-        process = new FrpProcess(frp, logger, appConfig);
+        process = new FrpProcess(frp, logger, environmentConfig);
         Add(id, process);
         return process;
     }

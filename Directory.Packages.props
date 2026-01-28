@@ -14,32 +14,32 @@
     <PackageVersion Include="FzLib" Version="$(FzLibVersion)" />
     <PackageVersion Include="FzLib.Avalonia" Version="$(FzLibVersion)" />
     <PackageVersion Include="log4net" Version="3.0.4" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting.WindowsServices" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="3.5.2" />
-    <PackageVersion Include="MSTest.TestFramework" Version="3.5.2" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="4.0.2" />
+    <PackageVersion Include="MSTest.TestFramework" Version="4.0.2" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="Mapster" Version="7.4.0" />
     <PackageVersion Include="ModernWpfUI" Version="0.9.6" />
     <PackageVersion Include="PieroDeTomi.DotNet.WebUtils" Version="1.0.0" />
-    <PackageVersion Include="Serilog" Version="4.2.0" />
+    <PackageVersion Include="Serilog" Version="4.3.0" />
     <PackageVersion Include="Serilog.AspNetCore" Version="8.0.2" />
-    <PackageVersion Include="Serilog.Extensions.Logging" Version="8.0.1" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
-    <PackageVersion Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="Serilog.Sinks.SQLite" Version="6.0.0" />
     <PackageVersion Include="System.Drawing.Common" Version="8.0.1" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="8.1.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.2" />
     <PackageVersion Include="WebView.Avalonia" Version="11.0.0.1" />
     <PackageVersion Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
-    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.6.5" />
+    <PackageVersion Include="Xaml.Behaviors.Avalonia" Version="11.3.9.3" />
     <PackageVersion Include="Xaml.Behaviors.Interactivity" Version="11.3.2" />
-    <PackageVersion Include="HotAvalonia" Version="3.0.0" PrivateAssets="All" Publish="True" />
-    <PackageVersion Include="System.Reactive" Version="6.0.1" />
+    <PackageVersion Include="HotAvalonia" Version="3.0.2" PrivateAssets="All" Publish="True" />
+    <PackageVersion Include="System.Reactive" Version="6.1.0" />
   </ItemGroup>
 </Project>

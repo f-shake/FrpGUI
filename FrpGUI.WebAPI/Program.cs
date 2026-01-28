@@ -1,15 +1,15 @@
-using FrpGUI.Configs;
+ï»¿using FrpGUI.Configs;
 using FrpGUI.Models;
 using FrpGUI.Services;
 using FrpGUI.WebAPI.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.WindowsServices;
-using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.OpenApi;
 
 namespace FrpGUI.WebAPI;
+
 internal class Program
 {
     private static bool swagger = true;
@@ -19,12 +19,13 @@ internal class Program
 
     private static void Main(string[] args)
     {
-        string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), nameof(FrpGUI), "logs");
-        Console.WriteLine($"ÈÕÖ¾±£´æÎ»ÖÃ£º{dir}");
+        string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+            nameof(FrpGUI), "logs");
+        Console.WriteLine($"æ—¥å¿—ä¿å­˜ä½ç½®ï¼š{dir}");
 
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console()  // ¿ØÖÆÌ¨Êä³ö
-            .WriteTo.File(Path.Combine(dir,"log.txt"), rollingInterval: RollingInterval.Day)  // °´Ìì¹ö¶¯´æ´¢ÈÕÖ¾
+            .WriteTo.Console() // æ§åˆ¶å°è¾“å‡º
+            .WriteTo.File(Path.Combine(dir, "log.txt"), rollingInterval: RollingInterval.Day) // æŒ‰å¤©æ»šåŠ¨å­˜å‚¨æ—¥å¿—
             .CreateLogger();
 
         WebApplicationBuilder builder = CreateBuilder(args);
@@ -47,43 +48,40 @@ internal class Program
         // Add services to the container.
 
         builder.Services.AddControllers(o =>
-        {
-            //²»¿ªÕâ¸ö£¬´«ÈëµÄ²ÎÊıÓĞnull£¨±ÈÈçtoken£©¾Í»á400 Bad Request
-            o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            o.Filters.Add(app.Services.GetRequiredService<FrpGUIActionFilter>());
-        })
+            {
+                //ä¸å¼€è¿™ä¸ªï¼Œä¼ å…¥çš„å‚æ•°æœ‰nullï¼ˆæ¯”å¦‚tokenï¼‰å°±ä¼š400 Bad Request
+                o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+                o.Filters.Add(app.Services.GetRequiredService<FrpGUIActionFilter>());
+            })
             .AddJsonOptions(o =>
-        {
-            o.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-            o.JsonSerializerOptions.Converters.Add(new FrpConfigJsonConverter());
-        });
+            {
+                o.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+                o.JsonSerializerOptions.Converters.Add(new FrpConfigJsonConverter());
+            });
 
         builder.Services.AddTransient<FrpGUIActionFilter>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(p =>
         {
-            var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//»ñÈ¡Ó¦ÓÃ³ÌĞòËùÔÚÄ¿Â¼£¨¾ø¶Ô£¬²»ÊÜ¹¤×÷Ä¿Â¼Ó°Ïì£¬½¨Òé²ÉÓÃ´Ë·½·¨»ñÈ¡Â·¾¶£©
+            var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
             var xmlPath = Path.Combine(basePath, "FrpGUI.WebAPI.xml");
             p.IncludeXmlComments(xmlPath);
 
-            var scheme = new OpenApiSecurityScheme()
+            p.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
             {
-                Description = "Authorization header",
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Authorization"
-                },
-                Scheme = "oauth2",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
-            };
-            p.AddSecurityDefinition("Authorization", scheme);
-            var requirement = new OpenApiSecurityRequirement();
-            requirement[scheme] = new List<string>();
-            p.AddSecurityRequirement(requirement);
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                Description = "JWT Authorization header using the Bearer scheme."
+            });
+
+            p.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+            {
+                [new OpenApiSecuritySchemeReference("bearer", document)] = []
+            });
         });
+
+
         builder.Services.AddSingleton<LoggerBase, Logger>();
         builder.Services.AddSingleton<FrpProcessCollection>();
         builder.Services.AddTransient<WebConfigService>();
@@ -91,34 +89,34 @@ internal class Program
         builder.Services.AddCors(options =>
         {
             options.AddPolicy(name: cors,
-                              policy =>
-                              {
-                                  policy.AllowAnyMethod()
-                                  .AllowAnyHeader()
-                                  .AllowAnyOrigin();
-                              });
+                policy =>
+                {
+                    policy.AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin();
+                });
         });
 
-        builder.Host.UseWindowsService(c =>
-        {
-            c.ServiceName = "FrpGUI";
-        });
+        builder.Host.UseWindowsService(c => { c.ServiceName = "FrpGUI"; });
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 
         AppConfig config = AppConfig.Get();
         builder.Services.AddSingleton(config);
+
+        builder.Services.AddSingleton<IEnvironmentConfig, WebEnvirementConfig>();
 
         return builder;
     }
 
     private static void SettingApp(WebApplication app)
     {
-        app.Services.GetRequiredService<LoggerBase>().Info("·şÎñÆô¶¯");
+        app.Services.GetRequiredService<LoggerBase>().Info("æœåŠ¡å¯åŠ¨");
         if (swagger || app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
         //app.UseWebSockets();
         app.UseHttpsRedirection();
         app.UseCors(cors);

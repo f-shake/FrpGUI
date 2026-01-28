@@ -1,6 +1,6 @@
 ﻿namespace FrpGUI.Models;
 
-public interface IAppConfig
+public interface IEnvironmentConfig
 {
     string FrpPath { get; }
 }

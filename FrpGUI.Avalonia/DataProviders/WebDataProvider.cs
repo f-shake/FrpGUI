@@ -126,7 +126,7 @@ namespace FrpGUI.Avalonia.DataProviders
             return result; //.Select(p => new FrpStatusInfo(p)).ToList();
         }
 
-        private FrpAvaloniaSourceGenerationContext JContext => FrpAvaloniaSourceGenerationContext.Get();
+        private FrpAvaloniaSourceGenerationContext JContext => FrpAvaloniaSourceGenerationContext.Default;
 
         public Task<List<LogEntity>> GetLogsAsync(DateTime timeAfter)
         {

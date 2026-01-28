@@ -163,7 +163,7 @@ public partial class App : Application
         builder.Services.AddTransient<LogViewModel>();
 
         builder.Services.AddSingleton(uiconfig);
-        builder.Services.AddSingleton<IAppConfig, UIConfig>(s => uiconfig);
+        builder.Services.AddSingleton<IEnvironmentConfig, UIConfig>(s => uiconfig);
 
         AppHost = builder.Build();
 

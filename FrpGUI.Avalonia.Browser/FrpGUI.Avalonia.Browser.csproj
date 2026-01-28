@@ -1,58 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
-  <PropertyGroup>
-    <TargetFramework>net8.0-browser</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <Nullable>disable</Nullable>
-    <LangVersion>latest</LangVersion>
-    <BaseOutputPath>../Generation/bin</BaseOutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <WasmEnableLinker>false</WasmEnableLinker>
-    <PublishTrimmed>false</PublishTrimmed>
-    <IlcGenerateCompleteTypeMetadata>true</IlcGenerateCompleteTypeMetadata>
-    <Version>$(AppVersion)</Version>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <TrimmerRootAssembly Include="FrpGUI.Avalonia" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net10.0-browser</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <WasmEnableLinker>false</WasmEnableLinker>
+        <PublishTrimmed>false</PublishTrimmed>
+        <IlcGenerateCompleteTypeMetadata>true</IlcGenerateCompleteTypeMetadata>
+        <Version>$(AppVersion)</Version>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(OutputToTempDir)' == 'T'" >
-    <OutputPath>$(Temp)\$(SolutionName)\$(Configuration)\$(AssemblyName)</OutputPath>
-    <BaseIntermediateOutputPath>$(Temp)\$(SolutionName)\obj\$(Configuration)\$(AssemblyName)</BaseIntermediateOutputPath>
-  </PropertyGroup>
+    <ItemGroup>
+        <TrimmerRootAssembly Include="FrpGUI.Avalonia"/>
+    </ItemGroup>
 
-  <ItemGroup Condition="'$(OutputToTempDir)' == 'T'" >
-    <AvaloniaXaml Remove="obj\**" />
-    <Compile Remove="obj\**" />
-    <Content Remove="obj\**" />
-    <EmbeddedResource Remove="obj\**" />
-    <None Remove="obj\**" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="uiconfig.json" />
-    <Content Remove="web.config" />
-    <Content Remove="wwwroot\favicon.ico" />
-  </ItemGroup>
+    <ItemGroup Condition="'$(OutputToTempDir)' == 'T'">
+        <AvaloniaXaml Remove="obj\**"/>
+        <Compile Remove="obj\**"/>
+        <Content Remove="obj\**"/>
+        <EmbeddedResource Remove="obj\**"/>
+        <None Remove="obj\**"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="uiconfig.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\favicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="web.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Remove="uiconfig.json"/>
+        <Content Remove="web.config"/>
+        <Content Remove="wwwroot\favicon.ico"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia.Browser" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="uiconfig.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="wwwroot\favicon.ico">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="web.config">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FrpGUI.Avalonia\FrpGUI.Avalonia.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Avalonia.Browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\FrpGUI.Avalonia\FrpGUI.Avalonia.csproj"/>
+    </ItemGroup>
 </Project>

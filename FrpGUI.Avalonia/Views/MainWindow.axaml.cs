@@ -21,7 +21,12 @@ public partial class MainWindow : ExtendedWindow
 
     private bool forceClose = false;
 
-    public MainWindow(IDialogService dialogService,MainView mainView)
+    public MainWindow()
+    {
+        Trace.WriteLine("正在通过默认构造函数创建MainWindow，仅用于调试");
+    }
+
+    public MainWindow(IDialogService dialogService, MainView mainView)
     {
         this.dialogService = dialogService;
         InitializeComponent();
