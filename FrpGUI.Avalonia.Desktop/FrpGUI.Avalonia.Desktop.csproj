@@ -4,26 +4,15 @@
     <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
     One for Windows with net7.0-windows TFM, one for MacOS with net7.0-macos and one with net7.0 TFM for Linux.-->
     <TargetFramework>net10.0</TargetFramework>
-    <Nullable>disable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <BaseOutputPath>../Generation/bin</BaseOutputPath>
     <SatelliteResourceLanguages>zh-CN</SatelliteResourceLanguages>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <OutputPath>$(Temp)\$(SolutionName)\$(Configuration)\$(AssemblyName)</OutputPath>
-    <BaseIntermediateOutputPath>$(Temp)\$(SolutionName)\obj\$(Configuration)\$(AssemblyName)</BaseIntermediateOutputPath>
     <ApplicationIcon>../FrpGUI.Avalonia/Assets/icon.ico</ApplicationIcon>
     <Version>$(AppVersion)</Version>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
-
-
-  <PropertyGroup Condition="'$(OutputToTempDir)' == 'T'" >
-    <OutputPath>$(Temp)\$(SolutionName)\$(Configuration)\$(AssemblyName)</OutputPath>
-    <BaseIntermediateOutputPath>$(Temp)\$(SolutionName)\obj\$(Configuration)\$(AssemblyName)</BaseIntermediateOutputPath>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(OutputToTempDir)' == 'T'" >
+  
+  <ItemGroup>
     <AvaloniaXaml Remove="obj\**" />
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
@@ -46,11 +35,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FrpGUI.Avalonia\FrpGUI.Avalonia.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="FzLib">
-      <HintPath>..\..\FzLib\Publish\libs\FzLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

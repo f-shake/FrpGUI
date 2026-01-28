@@ -2,35 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
-        <BaseOutputPath>../Generation/bin</BaseOutputPath>
-        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <RootNamespace>FrpGUI</RootNamespace>
     </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(OutputToTempDir)' == 'T'" >
-    <OutputPath>$(Temp)\$(SolutionName)\$(Configuration)\$(AssemblyName)</OutputPath>
-    <BaseIntermediateOutputPath>$(Temp)\$(SolutionName)\obj\$(Configuration)\$(AssemblyName)</BaseIntermediateOutputPath>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(OutputToTempDir)' == 'T'" >
-    <AvaloniaXaml Remove="obj\**" />
-    <Compile Remove="obj\**" />
-    <EmbeddedResource Remove="obj\**" />
-    <None Remove="obj\**" />
-  </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FzLib" Condition="'$(Configuration)' == 'Release' or '$(FzLocal)' == 'F'"/>
+        <AvaloniaXaml Remove="obj\**"/>
+        <Compile Remove="obj\**"/>
+        <EmbeddedResource Remove="obj\**"/>
+        <None Remove="obj\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
     </ItemGroup>
-
-
-    <ItemGroup Condition="'$(Configuration)' == 'Debug' and '$(FzLocal)' == 'T'">
-        <Reference Include="FzLib">
-            <HintPath>..\..\FzLib\Publish\libs\FzLib.dll</HintPath>
-        </Reference> 
-    </ItemGroup>
-
 </Project>

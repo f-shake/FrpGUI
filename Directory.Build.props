@@ -1,5 +1,9 @@
 <Project>
   <PropertyGroup>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
     <!--App版本-->
     <AppVersion>3.3</AppVersion>
 
@@ -9,11 +13,34 @@
     <FzLibVersion>3.3.2</FzLibVersion>
 
     <!--使用本地FzLib库。非作者使用时，应改为F-->
-    <FzLocal>F</FzLocal>
+    <FzLocal>false</FzLocal>
 
-    <!--在Windows上开发，可以设置输出到临时文件夹-->
-    <OutputToTempDir>T</OutputToTempDir>
+    <!--输出到指定文件夹-->
+    <SpecialOutputDir>true</SpecialOutputDir>
+    <OutputDir>C:\CodeTemp</OutputDir>
   </PropertyGroup>
+
+  <!--指定bin目录和obj目录位置-->
+  <PropertyGroup Condition="'$(SpecialOutputDir)' == 'true'">
+    <OutputPath>$(OutputDir)\$(SolutionName)\bin\$(Configuration)\$(MSBuildProjectName)</OutputPath>
+    <BaseIntermediateOutputPath>$(OutputDir)\$(SolutionName)\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+  <!--使用本地FzLib-->
+  <ItemGroup Condition="'$(Configuration)' == 'Debug' and '$(UseLocalFzLib)' == 'true'">
+    <Reference Include="FzLib">
+      <HintPath>..\..\FzLib\Publish\libs\FzLib.dll</HintPath>
+    </Reference>
+    <Reference Include="FzLib.Avalonia">
+      <HintPath>..\..\FzLib\Publish\libs\FzLib.Avalonia.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <!--使用Nuget中的FzLib-->
+  <ItemGroup Condition="! ('$(Configuration)' == 'Debug' and '$(UseLocalFzLib)' == 'true')">
+    <PackageReference Include="FzLib"/>
+    <PackageReference Include="FzLib.Avalonia"/>
+  </ItemGroup>
 
   <PropertyGroup>
     <NoWarn>CS0168,CS0169;MSB3539</NoWarn>

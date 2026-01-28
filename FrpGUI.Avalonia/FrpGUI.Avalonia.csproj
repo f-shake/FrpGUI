@@ -1,20 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <Nullable>disable</Nullable>
-    <LangVersion>latest</LangVersion>
-    <BaseOutputPath>../Generation/bin</BaseOutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(OutputToTempDir)' == 'T'" >
-    <OutputPath>$(Temp)\$(SolutionName)\$(Configuration)\$(AssemblyName)</OutputPath>
-    <BaseIntermediateOutputPath>$(Temp)\$(SolutionName)\obj\$(Configuration)\$(AssemblyName)</BaseIntermediateOutputPath>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(OutputToTempDir)' == 'T'" >
+  <ItemGroup>
     <AvaloniaXaml Remove="obj\**" />
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
@@ -32,22 +23,12 @@
 
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" />
-    <PackageReference Include="FzLib.Avalonia" Condition="'$(Configuration)' == 'Release' or '$(FzLocal)' == 'F'" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Serilog" />
     <PackageReference Include="Xaml.Behaviors.Avalonia" />
     <PackageReference Include="System.Reactive" />
     <!--<PackageReference Include="WebView.Avalonia" />-->
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(Configuration)' == 'Debug' and '$(FzLocal)' == 'T'">
-    <Reference Include="FzLib">
-      <HintPath>..\..\FzLib\Publish\libs\FzLib.dll</HintPath>
-    </Reference>
-    <Reference Include="FzLib.Avalonia">
-      <HintPath>..\..\FzLib\Publish\libs\FzLib.Avalonia.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
